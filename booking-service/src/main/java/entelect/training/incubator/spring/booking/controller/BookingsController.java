@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("bookings")
-
+@CrossOrigin(origins ={"http://localhost:4200"}, methods={RequestMethod.GET, RequestMethod.POST})
 public class BookingsController {
     private final Logger LOGGER = LoggerFactory.getLogger(BookingsController.class);
 
@@ -23,12 +23,12 @@ public class BookingsController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createBooking(@RequestParam int customerId, @RequestParam int flightId){
-        LOGGER.info("Processing booking creation request for booking={}", customerId);
+    public ResponseEntity<?> createBooking(@RequestParam int customerID, @RequestParam int flightID){
+        LOGGER.info("Processing booking creation request for booking={}", customerID);
 
 
 
-        final Booking savedBooking = bookingService.createBooking(customerId, flightId);
+        final Booking savedBooking = bookingService.createBooking(customerID, flightID);
 
         LOGGER.trace("Customer created");
         return new ResponseEntity<>(savedBooking, HttpStatus.CREATED);
